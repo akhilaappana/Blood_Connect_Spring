@@ -1,0 +1,390 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Donor Dashboard</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+		/* Remove default card borders */
+		.card {
+		    border: none !important; /* Remove card border */
+		    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* Light shadow for depth */
+		    border-radius: 10px; /* Rounded corners */
+		    margin-bottom: 20px; /* Space between cards */
+		    transition: transform 0.3s ease, box-shadow 0.3s ease; /* Smooth transition for hover effect */
+		}
+
+		/* Card content styling */
+		.card-body {
+		    padding: 20px; /* Padding inside cards */
+		}
+
+		/* Card title styling */
+		.card-title {
+		    font-size: 1.5rem;
+		    font-weight: 600;
+		    color: #2c3e50; /* Darker title text */
+		    margin-bottom: 10px; /* Spacing below title */
+		}
+
+		/* Card text styling */
+		.card-text {
+		    font-size: 1.1rem;
+		    color:black; /* Lighter text color for information */
+		}
+
+		/* Hover effect for cards */
+		.card:hover {
+		    transform: translateY(-5px); /* Slight lift effect */
+		    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2); /* Increase shadow for depth on hover */
+		}
+
+		/* Optional: Hover effect for action buttons */
+		.card:hover .btn {
+		    transform: translateY(-2px); /* Buttons slightly move up */
+		    transition: transform 0.2s ease;
+		}
+
+		/* Action buttons styling */
+		.action-buttons form {
+		    width: 45%; /* Ensure buttons are spaced out */
+		}
+
+		.btn-success {
+		    background-color: #2ecc71;
+		    border: none;
+		}
+
+		.btn-danger {
+		    background-color: #e74c3c;
+		    border: none;
+		}
+
+		.btn-success:hover {
+		    background-color: #27ae60;
+		}
+
+		.btn-danger:hover {
+		    background-color: #c0392b;
+		}
+
+        body {
+            background-color: #fff;
+            font-family: 'Arial', sans-serif;
+            color: #333;
+            margin: 0;
+        }
+
+        .navbar {
+            background-color: #333333;
+        }
+
+        .navbar-brand, .navbar-nav .nav-link {
+            color: #fff !important;
+        }
+
+        .navbar-nav .nav-link:hover {
+            color: #f39c12 !important;
+        }
+
+        /* Flex container for the whole page */
+        .container-fluid {
+            display: flex;
+            height: 100vh; /* Full height */
+            flex-direction: column;
+        }
+
+        /* Main Content Area - Adjusting for Side Nav */
+        .main-content {
+            display: flex;
+            flex: 1; /* Take up remaining space */
+        }
+
+        /* Movable Side Navbar Styling */
+        .side-navbar {
+            background-color: #f8f9fa;
+            width: 250px; /* Fixed width */
+            height: 100%; /* Full height */
+            padding-top: 20px;
+            transition: transform 0.3s ease;
+            cursor: move;
+            z-index: 999; /* Make sure it's above the content */
+            position: absolute; /* Now it's absolute, so it can be moved freely */
+        }
+
+        .side-navbar a {
+            color: #333;
+            padding: 10px;
+            text-decoration: none;
+            display: block;
+            font-size: 1.1rem;
+        }
+
+        .side-navbar a:hover {
+            background-color: #ddd;
+        }
+
+        .content-wrapper {
+            margin-left: 250px; /* Give space for the sidebar */
+            padding: 20px;
+			text-decoration-line: none;
+            flex: 1; /* Take up remaining space */
+        }
+
+        .profile-section {
+            display: none;
+            padding: 20px;
+            border-radius: 8px;
+            background-color: #f0f0f0;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+
+        .profile-section h3 {
+            color: #c0392b;
+        }
+
+        .btn-primary {
+            background-color: #3498db;
+            border: none;
+        }
+
+        .btn-primary:hover {
+            background-color: #2980b9;
+        }
+
+        .btn-grey {
+            background-color: #bdc3c7;
+            border: none;
+        }
+
+        .btn-grey:hover {
+            background-color: #95a5a6;
+        }
+		.list-group-item {
+		    border: none !important;
+		}
+        .action-buttons {
+            display: flex;
+            justify-content: space-between;
+        }
+
+        .action-buttons form {
+            width: 45%; /* Adjust width of the forms for buttons */
+        }
+    </style>
+</head>
+<body>
+    <!-- Main Navbar -->
+	<div th:replace="fragments :: navbar"></div>
+
+
+    <div class="container-fluid">
+        <!-- Side Navbar -->
+        <div class="side-navbar" id="sideNavbar">
+            <h4 class="text-left" style="color: #c0392b;">Dashboard</h4>
+            <a href="javascript:void(0)" onclick="showProfile()">Profile</a>
+            <a href="javascript:void(0)" onclick="showDashboard()">Dashboard</a>
+			<a href="javascript:void(0)" onclick="showHistory()">History</a>
+			<a href="/logout" th:href="@{/logout}">Logout</a>
+
+        </div>
+
+        <!-- Main Content Area -->
+        <div class="main-content">
+            <div class="content-wrapper">
+                <h1 style="color: #c0392b;">Donor Dashboard</h1>
+                
+                <!-- Dashboard Section -->
+                <div id="dashboard" class="dashboard-section">
+                    <h3>Requests</h3>
+                    <div class="list-group">
+                        <div class="list-group-item" th:each="request : ${requests}">
+                            <div class="card">
+                                <div class="card-body">
+                                    <h5 class="card-title" th:text="${request.receiver.name}"></h5>
+                                    <p class="card-text"><strong>Location:</strong> <span th:text="${request.receiver.place}"></span></p>
+                                    <p class="card-text"><strong>Phone:</strong> <span th:text="${request.receiver.phone}"></span></p>
+									<p class="card-text"><strong>Email:</strong> <span th:text="${request.receiver.email}"></span></p>
+									<p class="card-text"><strong>BloodType:</strong> <span th:text="${request.receiver.bloodTypeNeeded}"></span></p>									                                    
+									<div th:if="${request.receiver.proofFileBase64 != null}">
+                                        <h6><strong>Proof of Request:</strong></h6>
+                                        <a th:href="'data:image/jpeg;base64,' + ${request.receiver.proofFileBase64}" 
+                                           target="_blank" class="btn btn-grey">View Proof Image</a>
+                                        <a th:href="'data:image/jpeg;base64,' + ${request.receiver.proofFileBase64}"
+                                           th:download="proof_image.jpg" class="btn btn-grey">Download Proof Image</a>
+                                    </div>
+                                    <p><strong>Status:</strong> <span th:text="${request.status}"></span></p>
+
+									<div class="action-buttons">
+									    <!-- Accept Form -->
+									    <form th:action="@{/update-request}" method="post">
+									        <input type="hidden" th:name="requestId" th:value="${request.id}">
+									        <input type="hidden" th:name="status" th:value="Accepted">
+									        <button type="submit" class="btn btn-success">Accept</button>
+									    </form>
+									    
+									    <!-- Reject Form -->
+									    <form th:action="@{/update-request}" method="post">
+									        <input type="hidden" th:name="requestId" th:value="${request.id}">
+									        <input type="hidden" th:name="status" th:value="Rejected">
+									        <button type="submit" class="btn btn-danger">Reject</button>
+									    </form>
+									</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Profile Section -->
+                <div class="profile-section" id="profileSection">
+                    <h3>Donor Profile</h3>
+                    <p><strong>Name:</strong> <span th:text="${donor.name}"></span></p>
+                    <p><strong>Email:</strong> <span th:text="${donor.email}"></span></p>
+                    <p><strong>Location:</strong> <span th:text="${donor.place}"></span></p>
+                    <p><strong>Phone:</strong> <span th:text="${donor.phone}"></span></p>
+                    <p><strong>Blood Type:</strong> <span th:text="${donor.bloodType}"></span></p>
+                    <p><strong>Age:</strong> <span th:text="${donor.age}"></span></p>
+                    <button class="btn btn-primary" onclick="goBackToDashboard()">Back to Dashboard</button>
+                    <button class="btn btn-primary" onclick="editProfile()">Edit Profile</button>
+                </div>
+				
+				<!-- History Section -->
+				<div id="historySection" >
+				    <h3>History</h3><br>
+				    <div class="list-group">
+				        <!-- Accepted Requests -->
+				        <h4>Accepted Requests</h4>
+				        <div th:each="request : ${acceptedRequests}">
+				            <div class="card">
+				                <div class="card-body">
+				                    <h5 class="card-title" th:text="${request.receiver.name}"></h5>
+				                    <p class="card-text"><strong>Location:</strong> <span th:text="${request.receiver.place}"></span></p>
+				                    <p class="card-text"><strong>Phone:</strong> <span th:text="${request.receiver.phone}"></span></p>
+				                    <p class="card-text"><strong>Email:</strong> <span th:text="${request.receiver.email}"></span></p>
+				                </div>
+				            </div>
+				        </div>
+						<br>
+				        <!-- Rejected Requests -->
+				        <h4>Rejected Requests</h4>
+				        <div th:each="request : ${rejectedRequests}">
+				            <div class="card">
+				                <div class="card-body">
+				                    <h5 class="card-title" th:text="${request.receiver.name}"></h5>
+				                    <p class="card-text"><strong>Location:</strong> <span th:text="${request.receiver.place}"></span></p>
+				                    <p class="card-text"><strong>Phone:</strong> <span th:text="${request.receiver.phone}"></span></p>
+				                    <p class="card-text"><strong>Email:</strong> <span th:text="${request.receiver.email}"></span></p>
+				                </div>
+				            </div>
+				        </div>
+				    </div>
+				</div>
+
+
+				<!-- Edit Profile Form -->
+				<div id="editProfileForm" style="display: none;">
+				    <form action="/update-profile" method="post">
+				        <div class="mb-3">
+				            <label for="editName" class="form-label">Name</label>
+				            <input type="text" class="form-control" id="editName" name="name" th:value="${donor.name}">
+				        </div>
+				        <div class="mb-3">
+				            <label for="editEmail" class="form-label">Email</label>
+				            <input type="email" class="form-control" id="editEmail" name="email" th:value="${donor.email}">
+				        </div>
+				        <div class="mb-3">
+				            <label for="editPlace" class="form-label">Location</label>
+				            <input type="text" class="form-control" id="editPlace" name="place" th:value="${donor.place}">
+				        </div>
+				        <div class="mb-3">
+				            <label for="editPhone" class="form-label">Phone</label>
+				            <input type="text" class="form-control" id="editPhone" name="phone" th:value="${donor.phone}">
+				        </div>
+				        <div class="mb-3">
+				            <label for="editBloodType" class="form-label">Blood Type</label>
+				            <input type="text" class="form-control" id="editBloodType" name="bloodType" th:value="${donor.bloodType}">
+				        </div>
+				        <div class="mb-3">
+				            <label for="editAge" class="form-label">Age</label>
+				            <input type="number" class="form-control" id="editAge" name="age" th:value="${donor.age}">
+				        </div>
+				        <button type="submit" class="btn btn-primary">Save Changes</button>
+				        <button type="button" class="btn btn-secondary" onclick="cancelEdit()">Cancel</button>
+				    </form>
+				</div>
+
+            </div>
+        </div>
+    </div>
+
+    <!-- Bootstrap JS and dependencies -->
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.min.js"></script>
+
+    <script>
+		
+		
+		// Function to show the Edit Profile form
+		// Function to display the History section and hide others
+		function showHistory() {
+			document.getElementById("editProfileForm").style.display = "none"; // Show the edit form
+		    document.getElementById("profileSection").style.display = "none";
+		    document.getElementById("dashboard").style.display = "none";
+		    document.getElementById("historySection").style.display = "block";
+		}
+
+		function editProfile() {
+			document.getElementById("historySection").style.display = "none";
+		    document.getElementById("profileSection").style.display = "none"; // Hide the profile section
+		    document.getElementById("editProfileForm").style.display = "block"; // Show the edit form
+		}
+
+		// Function to cancel editing and go back to the profile section
+		function cancelEdit() {
+			document.getElementById("historySection").style.display = "none";
+		    document.getElementById("editProfileForm").style.display = "none"; // Hide the edit form
+		    document.getElementById("profileSection").style.display = "block"; // Show the profile section
+		}
+
+        
+        // Function to display the Profile section and hide Dashboard
+        function showProfile() {
+            const profileSection = document.getElementById("profileSection");
+            const dashboardSection = document.getElementById("dashboard");
+			document.getElementById("historySection").style.display = "none";
+            profileSection.style.display = "block"; // Show profile section
+            dashboardSection.style.display = "none"; // Hide dashboard section
+        }
+
+        // Function to display the Dashboard section and hide Profile
+        function showDashboard() {
+			document.getElementById("editProfileForm").style.display = "none";
+            const profileSection = document.getElementById("profileSection");
+            const dashboardSection = document.getElementById("dashboard");
+			document.getElementById("historySection").style.display = "none";
+            profileSection.style.display = "none"; // Hide profile section
+            dashboardSection.style.display = "block"; // Show dashboard section
+        }
+
+        // Function to go back to the Dashboard from the Profile section
+        function goBackToDashboard() {
+            const profileSection = document.getElementById("profileSection");
+            const dashboardSection = document.getElementById("dashboard");
+			document.getElementById("editProfileForm").style.display = "none";
+			document.getElementById("historySection").style.display = "none";
+            profileSection.style.display = "none"; // Hide profile section
+            dashboardSection.style.display = "block"; // Show dashboard section
+        }
+
+        // Optional: Automatically show the dashboard on page load
+        document.addEventListener('DOMContentLoaded', function () {
+            document.getElementById("dashboard").style.display = "block"; // Show the dashboard on page load
+            document.getElementById("profileSection").style.display = "none"; 
+			document.getElementById("editProfileForm").style.display = "none";
+			document.getElementById("historySection").style.display = "none";// Hide the profile section by default
+        });
+    </script>
+</body>
+</html>

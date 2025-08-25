@@ -1,0 +1,298 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Explore Blood Groups - Blood Connect</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+    <style>
+        /* Custom Styles */
+        body {
+            background-color: #f7f7f7;
+            color: #333;
+            font-family: 'Arial', sans-serif;
+        }
+
+        .navbar {
+            background-color: #333333;
+        }
+
+        .navbar-brand, .navbar-nav .nav-link {
+            color: white !important;
+        }
+
+        .navbar-nav .nav-link:hover {
+            color: #f39c12 !important;
+        }
+
+        h1 {
+            color: #c0392b;
+            font-size: 3rem;
+            font-weight: bold;
+            text-align: center;
+            margin-top: 30px;
+        }
+
+        .blood-group-section {
+            background-color: white;
+            padding: 30px;
+            border-radius: 8px;
+            margin: 20px 0;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+
+        .blood-group-section h2 {
+            color: #c0392b;
+        }
+
+        .blood-group-section .content {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        .blood-group-section .content img {
+            max-width: 200px;
+            height: auto;
+            border-radius: 8px;
+        }
+
+        .blood-group-section .content .description {
+            flex: 1;
+            margin-left: 20px;
+        }
+
+        .btn-custom {
+            background-color: #c0392b;
+            border-color: #c0392b;
+            color: white;
+            padding: 10px 20px;
+            border-radius: 5px;
+            text-decoration: none;
+            margin-top: 20px;
+            display: inline-block;
+        }
+
+        .btn-custom:hover {
+            background-color: #e74c3c;
+            border-color: #e74c3c;
+        }
+
+		/* Footer Styles */
+			        footer {
+			             background-color: #c0392b;
+			            color: white;
+			            text-align: center;
+			            padding: 20px;
+			            width: 100%;
+			            margin-top: auto; /* Push footer to the bottom */
+			        }
+
+			        footer .social-icons i {
+			            color: white;
+			            font-size: 1.5rem;
+			            margin: 0 10px;
+			            cursor: pointer;
+			        }
+
+			        footer .social-icons i:hover {
+			            color: #f39c12; /* Gold hover effect */
+			        }
+    </style>
+</head>
+<body>
+
+    <!-- Navbar -->
+    <nav class="navbar navbar-expand-lg navbar-dark">
+        <a class="navbar-brand" href="#">Blood Connect</a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNav">
+            <ul class="navbar-nav">
+                <li class="nav-item">
+                    <a class="nav-link" href="/">Home</a>
+                </li>
+                <li class="nav-item active">
+                    <a class="nav-link" href="/explore">Explore</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="/about">About</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="/blogs">Blogs</a>
+                </li>
+            </ul>
+        </div>
+    </nav>
+
+    <!-- Page Title -->
+    <h1>Explore Blood Groups</h1>
+
+    <!-- Blood Group Sections -->
+
+    <!-- O+ Blood Group -->
+    <div class="blood-group-section">
+        <h2>O+ Blood Group</h2>
+        <div class="content">
+            <div class="description">
+                <p>O+ is the most common blood type in many parts of the world. It contains red blood cells, plasma, white blood cells, and platelets. O+ individuals can donate blood to anyone with O+, A+, B+, and AB+ blood types. They can receive blood from O+, O-, A+, A-, B+, B-, AB+, and AB- blood types. O+ blood is essential for a wide range of medical conditions, including trauma care, surgery, and chronic illnesses. It is also important for pregnant women and babies with blood incompatibilities. Regular donation of O+ blood can help save lives in emergencies.</p>
+                <h4>Who Can Donate?</h4>
+                <p>People with type O+ can donate blood to O+, A+, B+, and AB+ blood types.</p>
+                <h4>Who Can Receive?</h4>
+                <p>People with O+ can receive blood from O+, O-, A+, A-, B+, B-, AB+, and AB- blood types.</p>
+                <a href="https://en.wikipedia.org/wiki/Blood_type_O" class="btn-custom" target="_blank">Learn More</a>
+            </div>
+            <div class="image">
+                <img src="https://via.placeholder.com/200x200?text=O+" alt="O+ Blood Group">
+            </div>
+        </div>
+    </div>
+
+    <!-- O- Blood Group -->
+    <div class="blood-group-section">
+        <h2>O- Blood Group</h2>
+        <div class="content">
+            <div class="description">
+                <p>O- is the universal blood donor type. This rare blood type is essential in emergency situations, as it can be given to anyone. O- blood is especially valuable in trauma cases and surgeries, as it is compatible with all other blood types (O-, O+, A-, A+, B-, B+, AB-, and AB+). However, O- individuals can only receive blood from other O- donors. It is essential for O- blood donors to maintain healthy iron levels and general health for frequent donations. O- blood plays a critical role in saving lives, particularly in hospitals and trauma centers.</p>
+                <h4>Who Can Donate?</h4>
+                <p>People with type O- can donate blood to O-, O+, A-, A+, B-, B+, AB-, and AB+ blood types.</p>
+                <h4>Who Can Receive?</h4>
+                <p>People with O- can receive blood from O- blood type.</p>
+                <a href="https://en.wikipedia.org/wiki/Blood_type_O" class="btn-custom" target="_blank">Learn More</a>
+            </div>
+            <div class="image">
+                <img src="https://via.placeholder.com/200x200?text=O-" alt="O- Blood Group">
+            </div>
+        </div>
+    </div>
+
+    <!-- A+ Blood Group -->
+    <div class="blood-group-section">
+        <h2>A+ Blood Group</h2>
+        <div class="content">
+            <div class="description">
+                <p>Blood type A+ is characterized by the presence of the A antigen and the Rh factor. It contains red blood cells, white blood cells, platelets, and plasma. People with A+ blood can donate to individuals with A+ and AB+ blood types, and can receive blood from A+, A-, O+, and O- blood types. This blood type is essential for treating patients undergoing surgeries, recovering from trauma, or managing chronic illnesses like anemia. Since it contains specific antibodies, individuals with A+ blood may experience allergic reactions to incompatible blood transfusions. It's important to ensure a healthy lifestyle, as blood donors with A+ blood are encouraged to stay hydrated, eat iron-rich foods, and avoid any health conditions that may affect their blood cells. Blood donations from A+ individuals are highly sought after in hospitals to treat cancer patients, trauma victims, and those undergoing surgery.</p>
+                <h4>Who Can Donate?</h4>
+                <p>People with type A+ can donate blood to A+ and AB+ blood types.</p>
+                <h4>Who Can Receive?</h4>
+                <p>People with A+ can receive blood from A+, A-, O+, and O- blood types.</p>
+                <a href="https://en.wikipedia.org/wiki/Blood_type_A" class="btn-custom" target="_blank">Learn More</a>
+            </div>
+            <div class="image">
+                <img src="https://via.placeholder.com/200x200?text=A+" alt="A+ Blood Group">
+            </div>
+        </div>
+    </div>
+
+    <!-- A- Blood Group -->
+    <div class="blood-group-section">
+        <h2>A- Blood Group</h2>
+        <div class="content">
+            <div class="description">
+                <p>Blood type A- is similar to A+, but without the Rh factor. It contains red blood cells, white blood cells, platelets, and plasma, and is important for blood transfusions in surgeries, emergencies, and cancer treatments. A- individuals can donate blood to A-, A+, AB-, and AB+ blood types, and can only receive blood from A- and O- blood types. A- is a rare blood type, making it a crucial resource in hospitals, especially in cases that require rare blood matching. As with all blood types, maintaining good health and a balanced diet, including iron-rich foods, is important for those with A- blood.</p>
+                <h4>Who Can Donate?</h4>
+                <p>People with type A- can donate blood to A-, A+, AB-, and AB+ blood types.</p>
+                <h4>Who Can Receive?</h4>
+                <p>People with A- can receive blood from A- and O- blood types.</p>
+                <a href="https://en.wikipedia.org/wiki/Blood_type_A" class="btn-custom" target="_blank">Learn More</a>
+            </div>
+            <div class="image">
+                <img src="https://via.placeholder.com/200x200?text=A-" alt="A- Blood Group">
+            </div>
+        </div>
+    </div>
+
+    <!-- B+ Blood Group -->
+    <div class="blood-group-section">
+        <h2>B+ Blood Group</h2>
+        <div class="content">
+            <div class="description">
+                <p>B+ blood contains the B antigen and the Rh factor. It can donate blood to B+ and AB+ recipients, and can receive blood from B+, B-, O+, and O- blood types. This blood type is used for a variety of medical treatments, including trauma cases, surgeries, and cancer treatments. It's also important for treating patients with blood diseases and those undergoing chemotherapy. For those with B+ blood, maintaining a healthy lifestyle is essential to ensure a continuous, healthy supply of blood cells for donation.</p>
+                <h4>Who Can Donate?</h4>
+                <p>People with type B+ can donate blood to B+ and AB+ blood types.</p>
+                <h4>Who Can Receive?</h4>
+                <p>People with B+ can receive blood from B+, B-, O+, and O- blood types.</p>
+                <a href="https://en.wikipedia.org/wiki/Blood_type_B" class="btn-custom" target="_blank">Learn More</a>
+            </div>
+            <div class="image">
+                <img src="https://via.placeholder.com/200x200?text=B+" alt="B+ Blood Group">
+            </div>
+        </div>
+    </div>
+
+    <!-- B- Blood Group -->
+    <div class="blood-group-section">
+        <h2>B- Blood Group</h2>
+        <div class="content">
+            <div class="description">
+                <p>Blood type B- is similar to B+ but lacks the Rh factor. It is relatively rare, making it a critical resource in medical settings. Like B+, B- contains red blood cells, white blood cells, platelets, and plasma, all of which are vital for various medical treatments. B- blood can be given to B-, B+, AB-, and AB+ recipients, and B- individuals can receive blood only from B- and O- donors. This blood type is especially important in emergency transfusions and surgeries.</p>
+                <h4>Who Can Donate?</h4>
+                <p>People with type B- can donate blood to B-, B+, AB-, and AB+ blood types.</p>
+                <h4>Who Can Receive?</h4>
+                <p>People with B- can receive blood from B- and O- blood types.</p>
+                <a href="https://en.wikipedia.org/wiki/Blood_type_B" class="btn-custom" target="_blank">Learn More</a>
+            </div>
+            <div class="image">
+                <img src="https://via.placeholder.com/200x200?text=B-" alt="B- Blood Group">
+            </div>
+        </div>
+    </div>
+
+    <!-- AB+ Blood Group -->
+    <div class="blood-group-section">
+        <h2>AB+ Blood Group</h2>
+        <div class="content">
+            <div class="description">
+                <p>AB+ is a universal plasma donor, meaning that people with AB+ blood can donate plasma to anyone. This blood type contains both A and B antigens, along with the Rh factor. AB+ individuals can donate blood to AB+ recipients and can receive blood from all blood types. It is particularly useful in trauma, surgeries, and cancer treatments. Because AB+ is less common, it is critical for medical professionals to ensure a proper match when administering transfusions to patients.</p>
+                <h4>Who Can Donate?</h4>
+                <p>People with type AB+ can donate blood to AB+ blood type.</p>
+                <h4>Who Can Receive?</h4>
+                <p>People with AB+ can receive blood from all blood types.</p>
+                <a href="https://en.wikipedia.org/wiki/Blood_type_AB" class="btn-custom" target="_blank">Learn More</a>
+            </div>
+            <div class="image">
+                <img src="https://via.placeholder.com/200x200?text=AB+" alt="AB+ Blood Group">
+            </div>
+        </div>
+    </div>
+
+    <!-- AB- Blood Group -->
+    <div class="blood-group-section">
+        <h2>AB- Blood Group</h2>
+        <div class="content">
+            <div class="description">
+                <p>AB- is a rare blood type that contains both A and B antigens but lacks the Rh factor. AB- can donate blood to AB- and AB+ recipients, and it can receive blood from AB-, AB+, A-, A+, B-, B+, O-, and O+ blood types. This blood type is especially important for trauma cases, cancer treatments, and surgeries where the immune system needs to be supported. As AB- is a rare blood type, those with this blood type should be vigilant about their health, avoid overexertion, and maintain a balanced diet. This blood type is useful for complex medical procedures that require precise blood matching.</p>
+                <h4>Who Can Donate?</h4>
+                <p>People with type AB- can donate blood to AB- and AB+ blood types.</p>
+                <h4>Who Can Receive?</h4>
+                <p>People with AB- can receive blood from AB-, AB+, A-, A+, B-, B+, O-, and O+ blood types.</p>
+                <a href="https://en.wikipedia.org/wiki/Blood_type_AB" class="btn-custom" target="_blank">Learn More</a>
+            </div>
+            <div class="image">
+                <img src="https://via.placeholder.com/200x200?text=AB-" alt="AB- Blood Group">
+            </div>
+        </div>
+    </div>
+
+	<!-- Footer -->
+	  <footer>
+	      <p>&copy; 2024 Blood Connect | All rights reserved</p>
+	      <div class="social-icons">
+	          <i class="bi bi-facebook" title="Facebook"></i>
+	          <i class="bi bi-twitter" title="Twitter"></i>
+	          <i class="bi bi-linkedin" title="LinkedIn"></i>
+	          <i class="bi bi-instagram" title="Instagram"></i>
+	      </div>
+	  </footer>
+
+	<!-- Bootstrap JS and dependencies (for mobile navbar toggling) -->
+	<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+	<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+
+	<!-- Bootstrap Icons (for social media icons) -->
+	<link href="https://cdn.jsdelivr.net/npm/bootstrap-icons/font/bootstrap-icons.css" rel="stylesheet">
+
+
+</body>
+</html>

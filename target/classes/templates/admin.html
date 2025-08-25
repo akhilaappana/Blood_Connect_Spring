@@ -1,0 +1,348 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Dashboard</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f9f9f9;
+            color: #333;
+        }
+
+        h1 {
+            text-align: center;
+            color: #c0392b;
+            margin: 20px 0;
+        }
+
+        main {
+            padding: 20px;
+        }
+
+        .navbar {
+            display: flex;
+            background-color: #333;
+            padding: 15px 30px;
+        }
+
+        .navbar a {
+            text-decoration: none;
+            color: white;
+        }
+		
+		.navbar-brand1{
+			font-size: 1rem;
+
+			padding: 7px 8px;
+
+		}
+        .navbar a:hover {
+            color:  #f39c12;
+        }
+
+        .navbar-brand {
+
+			padding: 5px 1px;
+			padding-left: -1px;
+			padding-right: 6px;
+            font-size: 1.3rem;
+			color: white !important; /* White text for navbar links */
+        }
+
+        
+        .stats {
+            display: flex;
+            justify-content: space-between;
+            gap: 20px;
+            margin-bottom: 40px;
+            flex-wrap: wrap;
+        }
+
+        .stat {
+            background-color: white;
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            padding: 20px;
+            text-align: center;
+            flex: 1;
+            min-width: 250px;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .stat:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 12px rgba(0, 0, 0, 0.2);
+        }
+
+        .stat h2 {
+            margin-bottom: 10px;
+            font-size: 1.5rem;
+            color: #c0392b;
+        }
+
+        .stat p {
+            font-size: 1.2rem;
+            font-weight: bold;
+            color: #555;
+        }
+
+        .donation-status {
+            margin-bottom: 40px;
+        }
+
+        .status {
+            display: flex;
+            justify-content: space-between;
+            gap: 20px;
+            flex-wrap: wrap;
+        }
+
+        .status div {
+            background-color: white;
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            padding: 20px;
+            text-align: center;
+            flex: 1;
+            min-width: 250px;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .status div:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 12px rgba(0, 0, 0, 0.2);
+        }
+
+        .status h3 {
+            font-size: 1.3rem;
+            color: #333;
+            margin-bottom: 10px;
+        }
+
+        .status p {
+            font-size: 1.2rem;
+            font-weight: bold;
+            color: #555;
+        }
+
+        @media (max-width: 768px) {
+            .stats, .status {
+                flex-direction: column;
+                gap: 20px;
+            }
+        }
+
+        /* For responsive tables */
+        table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+
+        th, td {
+            padding: 10px;
+            text-align: left;
+            border-bottom: 1px solid #ddd;
+        }
+
+        th {
+            background-color: #c0392b;
+            color: white;
+        }
+	button{
+		text-decoration: none;
+	}
+        .data-section {
+            display: none;
+            margin-top: 20px;
+        }
+
+        .data-section table {
+            width: 100%;
+            overflow-x: auto;
+        }
+		/* Back arrow styling */
+		       .back-arrow {
+		           font-size: 2rem;
+		           color: #c0392b;
+		           text-decoration: none;
+		           display: inline-block;
+		           margin: 15px 20px;
+		           font-weight: bold;
+		       }
+
+		       .back-arrow:hover {
+		           color: #f39c12;
+		       }			   .header-container {
+			               display: flex;
+			               align-items: center;
+			               gap: 10px; /* Space between the arrow and the heading */
+			               margin: 20px;
+			           }
+
+			           .back-arrow {
+			               font-size: 1.5rem;
+			               color: #c0392b;
+			               text-decoration: none;
+			               font-weight: bold;
+			           }
+
+			           .back-arrow:hover {
+			               color: #f39c12;
+			           }
+
+			           h1 {
+			               margin: 0;
+						   align-items: center;
+			               font-size: 2rem;
+			               color:  #c0392b;
+			           }
+
+    </style>
+</head>
+<body>
+    <div class="navbar">
+        <a class="navbar-brand" href="#">Blood Connect</a>
+        <a class="navbar-brand1"href="/" th:href="@{/}">Home</a>
+        <a class="navbar-brand1" href="/explore" th:href="@{/explore}">Explore</a>
+        <a class="navbar-brand1" href="/about" th:href="@{/about}">About</a>
+        <a class="navbar-brand1" href="/blogs" th:href="@{/blogs}">Blogs</a>
+    </div>
+	<div class="header-container">
+			<a href="javascript:void(0)" class="back-arrow" onclick="showback()" id="back">&larr;</a>
+
+			<h1>Admin Dashboard</h1>
+	   </div>
+
+
+    <main >
+        <section class="stats">
+            <div class="stat" onclick="toggleView('donors')">
+                 <h2 >Total Donoros</h2>
+                <p th:text="${totalDonors}"></p>
+            </div>
+            <div class="stat" onclick="toggleView('receivers')">
+                <h2>Total Receivers</h2>
+                <p th:text="${totalReceivers}"></p>
+            </div>
+            <div class="stat" onclick="toggleView('donations')">
+                <h2>Total Requests</h2>
+                <p th:text="${totalDonations}"></p>
+            </div>
+        </section>
+
+        <section class="donation-status" id="mainContent">
+            <h2>Donation Status</h2>
+            <div class="status">
+                <div>
+                    <h3>Pending Donations</h3>
+                    <p th:text="${pendingDonations}"></p>
+                </div>
+                <div>
+                    <h3>Accepted Donations</h3>
+                    <p th:text="${acceptedDonations}"></p>
+                </div>
+                <div>
+                    <h3>Rejected Donations</h3>
+                    <p th:text="${rejectedDonations}"></p>
+                </div>
+            </div>
+        </section>
+
+
+        <div id="donorsSection" class="data-section" th:if="${donors != null}">
+            <h2>Donors List</h2>
+            <table>
+                <thead>
+                    <tr>
+                        <th>Donor Name</th>
+                        <th>Blood Group</th>
+                        <th>Location</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr th:each="donor : ${donors}">
+                        <td th:text="${donor.name}"></td>
+                        <td th:text="${donor.bloodType}"></td>
+                        <td th:text="${donor.place}"></td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+
+        <div id="receiversSection" class="data-section" th:if="${receivers != null}">
+            <h2>Receivers List</h2>
+            <table>
+                <thead>
+                    <tr>
+                        <th>Receiver Name</th>
+                        <th>Blood Group Needed</th>
+                        <th>Location</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr th:each="receiver : ${receivers}">
+                        <td th:text="${receiver.name}"></td>
+                        <td th:text="${receiver.bloodTypeNeeded}"></td>
+                        <td th:text="${receiver.place}"></td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+
+        <div id="donationsSection" class="data-section" th:if="${donations != null}">
+            <h2>Total Donations</h2>
+            <table>
+                <thead>
+                    <tr>
+                        <th>Receiver Name</th>
+                        <th>Donor Name</th>
+                        <th>Status</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr th:each="donation : ${donations}">
+                        <td th:text="${donation.receiver.name}"></td>
+                        <td th:text="${donation.donor.name}"></td>
+                        <td th:text="${donation.status}"></td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </main>
+
+    <script>
+		function toggleView(section) {
+		            // Hide all sections
+					
+					document.getElementById('mainContent').style.display = 'none';
+					
+		            const sections = ['donors', 'receivers', 'donations'];
+		            sections.forEach((sec) => {
+		                document.getElementById(sec + 'Section').style.display = 'none';
+		            });
+
+		            // Show the selected section
+		            document.getElementById(section + 'Section').style.display = 'block';
+					document.getElementById('back').style.display = 'inline-block';
+		        }
+        function showback(){
+			document.getElementById('back').style.display = 'none';
+			document.getElementById('mainContent').style.display = 'block';
+			            document.getElementById('donorsSection').style.display = 'none';
+			            document.getElementById('receiversSection').style.display = 'none';
+			            document.getElementById('donationsSection').style.display = 'none';
+			
+		}
+		document.addEventListener('DOMContentLoaded', function () {
+		           showback();
+		       });
+        
+    </script>
+</body>
+</html>

@@ -1,0 +1,316 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>About - Blood Connect</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+    <style>
+        body {
+            background-color: #fff;
+            color: #333;
+            font-family: Arial, sans-serif;
+        }
+        
+        .navbar {
+            background-color: #333333; /* Blood red color */
+        }
+
+        .navbar-brand, .navbar-nav .nav-link {
+            color: #fff !important;
+        }
+
+        .navbar-nav .nav-link:hover {
+            color: #f39c12 !important; /* Gold color on hover */
+        }
+
+        h2, h3 {
+            color: #c0392b;
+            font-size: 2.5rem;
+            font-weight: bold;
+        }
+
+        h4 {
+            color: #c0392b;
+            font-size: 1.8rem;
+            font-weight: bold;
+        }
+
+        p {
+            color: #555;
+            font-size: 1.1rem;
+            line-height: 1.8;
+        }
+
+        .container {
+            background-color: #f9f9f9;
+            padding: 40px;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            margin-top: 50px;
+        }
+
+        .mission-section, .how-it-works, .get-involved {
+            margin-top: 40px;
+        }
+
+        footer {
+            background-color: #c0392b;
+            color: white;
+            text-align: center;
+            padding: 20px;
+            width: 100%;
+            margin-top: auto; /* Push footer to the bottom */
+        }
+
+        footer .social-icons i {
+            color: white;
+            font-size: 1.5rem;
+            margin: 0 10px;
+            cursor: pointer;
+        }
+
+        footer .social-icons i:hover {
+            color: #f39c12; /* Gold hover effect */
+        }
+		.fp{
+			color:white;
+		}
+
+        /* Button Styles */
+        .btn-custom {
+            background-color: #c0392b;
+            color: white;
+            border: none;
+            padding: 15px 30px;
+            border-radius: 5px;
+            font-size: 1.25rem;
+            margin: 10px;
+            text-decoration: none;
+            display: inline-block;
+        }
+
+        .btn-custom:hover {
+            background-color: #e74c3c;
+            border-color: #e74c3c;
+        }
+
+        /* Image Section as Background */
+        .image-container {
+            position: relative;
+            width: 100%;
+            min-height: 400px; /* Use min-height for better flexibility */
+            background-image: url('https://t3.ftcdn.net/jpg/09/10/00/48/360_F_910004839_r1AKb3kM8GWp8vcbHdlKUTQkzewLakEp.jpg');
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
+        }
+
+        /* Overlay to make text readable */
+        .image-container::before {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.4); /* Semi-transparent black overlay */
+            z-index: 1;
+        }
+
+        /* Content on top of the image */
+        .image-container .content {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            z-index: 2;
+            color: white;
+            text-align: center;
+        }
+
+        /* Text and Image Section */
+        .text-image-container {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            margin-top: 50px;
+            padding: 20px;
+        }
+
+        .text-image-container .text-section {
+            flex: 1;
+            margin-right: 20px;
+        }
+
+        .text-image-container .image-section {
+            flex: 1;
+            text-align: right;
+        }
+
+        .text-image-container img {
+            max-width: 100%;
+            height: auto;
+            border-radius: 10px;
+        }
+
+        /* New Section Styles for How to Get Involved */
+        .involved-container {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            margin-top: 50px;
+            padding: 20px;
+        }
+
+        .involved-container .text-section {
+            flex: 1;
+            margin-left: 20px;
+        }
+
+        .involved-container .image-section {
+            flex: 1;
+            text-align: left;
+        }
+
+        /* Remove blue color and underline for all links */
+        a {
+            text-decoration: none; /* Remove underline */
+            color: inherit; /* Inherit color from parent element */
+        }
+
+        /* Ensure no underline and no outline on hover or focus */
+        a:focus, a:hover {
+            outline: none; /* Remove the default focus outline */
+            color: #f39c12; /* Gold color on hover */
+            text-decoration: none; /* Ensure no underline on hover */
+        }
+		.card {
+		           margin-top: 20px;
+		           background-color: #f9f9f9;
+		           border-radius: 10px;
+		           box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+		       }
+
+		       .card-title {
+		           color:white;
+		           font-weight: bold;
+		       }
+
+		       .card-body {
+		           font-size: 1.2rem;
+		           color: #555;
+		       }
+
+		       .card-header {
+		           background-color: #c0392b;
+		           color: white;
+		       }
+
+
+    </style>
+</head>
+<body>
+
+    <!-- Navbar -->
+    <nav class="navbar navbar-expand-lg navbar-dark">
+        <a class="navbar-brand" href="#">Blood Connect</a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNav">
+            <ul class="navbar-nav">
+                <li class="nav-item active">
+                    <a class="nav-link" th:href="@{/}">Home</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" th:href="@{/explore}">Explore</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" th:href="@{/about}">About</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" th:href="@{/blogs}">Blogs</a>
+                </li>
+            </ul>
+        </div>
+    </nav>
+
+    <!-- About Section -->
+    <div class="container mt-5">
+        <h2>About Blood Connect</h2>
+        <p>Blood Connect is a platform dedicated to helping save lives by connecting blood donors with people in need of blood transfusions. Our goal is to ensure that everyone who needs blood has access to it, especially during emergencies, surgeries, and critical conditions. We provide a seamless and secure way for individuals to donate blood and for recipients to receive it in their time of need.</p>
+		<!-- Stats Cards -->
+		        <div class="row">
+		            <div class="col-md-4">
+		                <div class="card">
+		                    <div class="card-header">
+		                        <h5 class="card-title">Total Registrations</h5>
+		                    </div>
+		                    <div class="card-body">
+		                        <p class="card-text" th:text="${totalDonors}"></p>
+		                    </div>
+		                </div>
+		            </div>
+		            <div class="col-md-4">
+		                <div class="card">
+		                    <div class="card-header">
+		                        <h5 class="card-title">Total Donations</h5>
+		                    </div>
+		                    <div class="card-body">
+		                        <p class="card-text" th:text="${acceptedDonations}"></p>
+		                    </div>
+		                </div>
+		            </div>
+		        </div>
+
+
+        <div class="mission-section">
+            <h4>Our Mission</h4>
+            <p>At Blood Connect, our mission is simple: to bridge the gap between blood donors and recipients, making blood donation easy, safe, and accessible for everyone. We aim to create a community of compassionate individuals who understand the importance of giving blood and are willing to donate regularly to help save lives. Through our platform, we aim to ensure that no one has to suffer due to a lack of blood resources, especially in emergencies.</p>
+        </div>
+
+        <div class="how-it-works">
+            <h4>How It Works</h4>
+            <p>Joining Blood Connect is easy and free! Here's how it works:</p>
+            <ol>
+                <li><strong>Sign Up:</strong> Create a free account on our platform by providing some basic details about yourself.</li>
+                <li><strong>Donate Blood:</strong> Once registered, you can choose to donate blood whenever you're ready. Our platform matches your donation with a recipient in need.</li>
+                <li><strong>Track Your Donation:</strong> Keep track of your blood donations and how they’ve helped save lives. You will receive updates about the recipients and the impact of your donation.</li>
+                <li><strong>Spread the Word:</strong> Help us reach more donors by sharing your experience and encouraging your friends and family to donate.</li>
+            </ol>
+        </div>
+
+        <div class="get-involved">
+            <h4>How You Can Get Involved</h4>
+            <p>There are many ways you can make a difference:</p>
+            <ul>
+                <li><strong>Donate Blood:</strong> Become a regular blood donor and save lives. Blood donors are always needed, especially during emergencies or in places with blood shortages.</li>
+                <li><strong>Volunteer:</strong> You can volunteer your time to help organize blood donation camps or assist in spreading awareness about blood donation.</li>
+                <li><strong>Spread Awareness:</strong> Share information about Blood Connect with your friends, family, and colleagues. The more people who know about us, the more lives we can save.</li>
+                <li><strong>Support the Cause:</strong> Whether it's through donations, partnerships, or simply lending your voice to our cause, you can help us expand our reach and impact.</li>
+            </ul>
+        </div>
+
+        <a href="/register" class="btn btn-custom mt-4">Join Blood Connect Now</a>
+    </div>
+
+    <!-- Footer -->
+    <footer>
+        <p class="fp">&copy; 2024 Blood Connect | All rights reserved</p>
+        <div class="social-icons">
+            <i class="bi bi-facebook" title="Facebook"></i>
+            <i class="bi bi-twitter" title="Twitter"></i>
+            <i class="bi bi-linkedin" title="LinkedIn"></i>
+            <i class="bi bi-instagram" title="Instagram"></i>
+        </div>
+    </footer>
+
+    <!-- Bootstrap JS and dependencies (for mobile navbar toggling) -->
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+
+    <!-- Bootstrap Icons (for social media icons) -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons/font/bootstrap-icons.css" rel="stylesheet">
+</body>
+</html>

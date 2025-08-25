@@ -1,0 +1,290 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Blood Connect</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+	<style>
+	        /* Layout Styles */
+	        html, body {
+	            height: 100%; /* Ensure the body takes up full height of the viewport */
+	            margin: 0;
+	            display: flex;
+	            flex-direction: column;
+	        }
+
+	        /* Custom Navbar Styles */
+	        .navbar {
+	            background-color: #333333; /* Dark Grey background */
+	        }
+
+	        .navbar-brand, .navbar-nav .nav-link {
+	            color: white !important; /* White text for navbar links */
+	        }
+
+	        .navbar-nav .nav-link:hover {
+	            color: #f39c12 !important; /* Gold color on hover */
+	        }
+
+	        /* Page Styles */
+	        body {
+	            background-color: #fff;
+	            color: #333;
+	            font-family: 'Arial', sans-serif;
+	        }
+
+	        h1 {
+	            color: #c0392b; /* Red color for the title */
+	            font-size: 3rem;
+	            font-weight: bold;
+	        }
+
+	        .container p {
+	            font-size: 1.2rem;
+	            color: #555;
+	        }
+
+	        /* Button Styles */
+	        .btn-custom {
+	            background-color: #c0392b;
+	            border-color: #c0392b;
+	            color: white;
+	            padding: 15px 30px;
+	            border-radius: 5px;
+	            font-size: 1.25rem;
+	            margin: 10px;
+	            text-decoration: none;
+	            display: inline-block;
+	        }
+
+	        .btn-custom:hover {
+	            background-color: #e74c3c;
+	            border-color: #e74c3c;
+	        }
+
+	        /* Image Section as Background */
+			.image-container {
+			            position: relative;
+			            width: 100%;
+			            min-height: 400px;  /* Use min-height for better flexibility */
+			            background-image: url('https://t3.ftcdn.net/jpg/09/10/00/48/360_F_910004839_r1AKb3kM8GWp8vcbHdlKUTQkzewLakEp.jpg');
+			            background-size: cover;
+			            background-position: center;
+			            background-repeat: no-repeat;
+			        }
+
+	        /* Overlay to make text readable */
+	        .image-container::before {
+	            content: "";
+	            position: absolute;
+	            top: 0;
+	            left: 0;
+	            width: 100%;
+	            height: 100%;
+	            background: rgba(0, 0, 0, 0.4); /* Semi-transparent black overlay */
+	            z-index: 1;
+	        }
+
+	        /* Content on top of the image */
+	        .image-container .content {
+	            position: absolute;
+	            top: 50%;
+	            left: 50%;
+	            transform: translate(-50%, -50%);
+	            z-index: 2;
+	            color: white;
+	            text-align: center;
+	        }
+
+	        /* Text and Image Section */
+	        .text-image-container {
+	            display: flex;
+	            align-items: center;
+	            justify-content: space-between;
+	            margin-top: 50px;
+	            padding: 20px;
+	        }
+
+	        .text-image-container .text-section {
+	            flex: 1;
+	            margin-right: 20px;
+	        }
+
+	        .text-image-container .image-section {
+	            flex: 1;
+	            text-align: right;
+	        }
+
+	        .text-image-container img {
+	            max-width: 100%;
+	            height: auto;
+	            border-radius: 10px;
+	        }
+
+	        /* New Section Styles for How to Get Involved */
+	        .involved-container {
+	            display: flex;
+	            align-items: center;
+	            justify-content: space-between;
+	            margin-top: 50px;
+	            padding: 20px;
+	        }
+
+	        .involved-container .text-section {
+	            flex: 1;
+	            margin-left: 20px;
+	        }
+
+	        .involved-container .image-section {
+	            flex: 1;
+	            text-align: left;
+	        }
+
+	        /* Footer Styles */
+	        footer {
+	             background-color: #c0392b;
+	            color: white;
+	            text-align: center;
+	            padding: 20px;
+	            width: 100%;
+	            margin-top: auto; /* Push footer to the bottom */
+	        }
+
+	        footer .social-icons i {
+	            color: white;
+	            font-size: 1.5rem;
+	            margin: 0 10px;
+	            cursor: pointer;
+	        }
+
+	        footer .social-icons i:hover {
+	            color: #f39c12; /* Gold hover effect */
+	        }
+			/* Remove blue color and underline for all links */
+			a {
+			    text-decoration: none; /* Remove underline */
+			    color: inherit; /* Inherit color from parent element */
+			}
+
+			/* Ensure no underline and no outline on hover or focus */
+			a:focus, a:hover {
+			    outline: none; /* Remove the default focus outline */
+			    color: #f39c12; /* Gold color on hover */
+			    text-decoration: none; /* Ensure no underline on hover */
+			}
+
+			
+	    </style>
+	</head>
+	<body>
+
+    <!-- Navbar -->
+    <nav class="navbar navbar-expand-lg navbar-dark">
+        <a class="navbar-brand" href="#">Blood Connect</a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNav">
+            <ul class="navbar-nav">
+                <li class="nav-item active">
+                    <a class="nav-link" th:href="@{/}">Home</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" th:href="@{/explore}">Explore</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" th:href="@{/about}">About</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" th:href="@{/blogs}">Blogs</a>
+                </li>
+            </ul>
+        </div>
+    </nav>
+
+    <!-- Welcome Section -->
+    <div class="container mt-5">
+        <h1>Welcome to Blood Connect!</h1>
+        <p>Connecting for a better future.</p>
+    </div>
+
+   
+
+    <!-- Image Section Below Buttons with Background Image -->
+    <div class="image-container">
+        <div class="content">
+			
+            <h2>Make a Difference Today</h2>
+            <p>Your blood donation can save lives.</p>
+        </div>
+    </div>
+	<!-- Three buttons for Donor, Admin, and Receiver -->
+				   <div class="container mt-5 text-center">
+				       <a href="/login" class="btn-custom">Donor</a>
+				       <a href="/adminlogin" class="btn-custom">Admin</a>
+				       <a href="/register-receiver" class="btn-custom">Receiver</a>
+				   </div>
+
+    <!-- Text and Image Section for "Why Donate Blood?" -->
+    <div class="text-image-container">
+        <!-- Left Text Section -->
+        <div class="text-section">
+			<h2>Why Donate Blood?</h2>
+			           <p>Blood donation is a powerful way to save lives. Every donation can help save up to three lives. By donating blood, you contribute to your community's well-being and help those in need during medical emergencies.</p>
+			           
+			           <p>Blood is essential for medical procedures, surgeries, and the treatment of various diseases and conditions. It is needed for patients with cancer, trauma victims, people undergoing surgeries, and those with chronic conditions like anemia. Without a reliable supply of blood, these patients might not survive or recover as quickly.</p>
+			           
+			           <p>Donating blood is a simple and safe process that can make a significant difference. In fact, one donation can help treat a variety of medical conditions, such as:</p>
+			           <ul>
+			               <li>Accident and trauma victims who need immediate blood transfusions.</li>
+			               <li>Patients undergoing major surgeries, including heart surgery, organ transplants, and more.</li>
+			               <li>Individuals battling cancer who require frequent blood and platelet transfusions.</li>
+			               <li>People suffering from blood disorders like sickle cell anemia or thalassemia.</li>
+			           </ul>
+			           
+
+        </div>
+
+        <!-- Right Image Section -->
+        <div class="image-section">
+            <img src="			https://i.pinimg.com/474x/2c/d0/66/2cd06621c35a0a7a713cb41d12fa6683.jpg" alt="Blood Donation Impact" >
+        </div>
+    </div>
+
+    <!-- New Section for "How to Get Involved" -->
+    <div class="involved-container">
+        <!-- Left Image Section -->
+        <div class="image-section">
+            <img src="https://i.pinimg.com/736x/1d/d9/fd/1dd9fdedea8f897d5aeafa3179d85b76.jpg" alt="Get Involved Image"><br/><br/>
+        </div>
+
+        <!-- Right Text Section -->
+        <div class="text-section">
+			<h3>How to Get Involved</h3>
+			            <p>Getting involved in blood donation is easy! Simply find a nearby blood drive or donation center and schedule an appointment. Most donation centers accept blood donations from healthy individuals aged 17 or older who meet specific health and weight requirements.</p>
+
+			            <p>Your donation, no matter how small it may seem, has the power to make a life-saving difference. The next time you're asked to donate, consider the lives you're impacting, and take a step to make a real change in the world.</p>
+
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer>
+        <p>&copy; 2024 Blood Connect | All rights reserved</p>
+        <div class="social-icons">
+            <i class="bi bi-facebook" title="Facebook"></i>
+            <i class="bi bi-twitter" title="Twitter"></i>
+            <i class="bi bi-linkedin" title="LinkedIn"></i>
+            <i class="bi bi-instagram" title="Instagram"></i>
+        </div>
+    </footer>
+
+    <!-- Bootstrap JS and dependencies (for mobile navbar toggling) -->
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+
+    <!-- Bootstrap Icons (for social media icons) -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons/font/bootstrap-icons.css" rel="stylesheet">
+</body>
+</html>
