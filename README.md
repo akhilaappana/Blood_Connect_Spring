@@ -5,8 +5,8 @@ Blood Connect is a Spring Boot + Thymeleaf web application that connects blood d
 It provides a simple and effective platform where donors can register, recipients can request blood, and admins can manage blood bank records efficiently.
 ---
 ##Features
-***User Authentication(Login & Signup for Donors/Recipients/Admins)
-***Donor Registration with personal details, blood group & availability
+User Authentication(Login & Signup for Donors/Recipients/Admins)
+Donor Registration with personal details, blood group & availability
 -Blood Requests (submit & track requests)
 -Search Donors by blood group and location
 Admin Dashboard to manage users, donors, and requests
@@ -38,6 +38,18 @@ Donor: Register & update availability
 Recipient: Search donors & request blood
 Admin: Manage users, donors, and requests
 ---
+## 🚀 Features
+- OTP Verification  
+- BCrypt Password  
+- Forgot Password  
+
+---
+
+## 🛠️ Tech Stack
+- Spring Boot  
+- Thymeleaf  
+- MySQL  
+
 
 
 
